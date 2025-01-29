@@ -4,7 +4,7 @@ This project is a simple API for managing orders using Node.js, Express, and Typ
 
 ## Prerequisites
 
-- Node.js (>= 14.x)
+- Node.js (>= 20.x)
 - npm or yarn
 
 ## Setup
