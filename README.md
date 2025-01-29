@@ -1,13 +1,31 @@
 # XPE Challenge
 
-This project is a simple API for managing orders using Node.js, Express, and TypeORM.
+A robust RESTful API service for order management built with Node.js, Express, and TypeORM.
 
-## Prerequisites
+## 📋 Table of Contents
 
-- Node.js (>= 20.x)
-- npm or yarn
+- [Features](#features)
+- [System Architecture](#system-architecture)
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
+- [Project Structure](#project-structure)
+- [API Documentation](#api-documentation)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [License](#license)
 
-## C4 Model
+## ✨ Features
+
+- RESTful API endpoints for order management
+- TypeORM integration with PostgreSQL
+- Request validation and error handling
+- Comprehensive logging system
+- Pagination support
+- Unit and integration tests
+- API documentation
+
+## 🏗 System Architecture
 
 ### System Context Diagram (Level 1)
 
@@ -21,13 +39,11 @@ This project is a simple API for managing orders using Node.js, Express, and Typ
 
 *Figure 2: Container diagram showing the internal architecture and components*
 
-## Architecture Overview
+## 📌 Prerequisites
 
-![Architecture Overview](./docs/architecture.png)
+- Node.js (>= 20.x)
 
-*Figure 1: High-level architecture diagram showing the system components and their interactions*
-
-## Setup
+## 🚀 Getting Started
 
 1. Clone the repository:
 
@@ -44,57 +60,99 @@ This project is a simple API for managing orders using Node.js, Express, and Typ
    yarn install
    ```
 
-3. Build the project:
+3. Set up environment variables:
 
    ```sh
-   npm run build
-   # or
-   yarn build
+   cp .env.example .env
+   # Edit .env with your configuration
    ```
 
-## Running the Application
-
-1. Start the development server:
+4. Build and start the application:
 
    ```sh
-   npm run dev
+   npm run build && npm start
    # or
-   yarn dev
+   yarn build && yarn start
    ```
 
-2. The API will be available at `http://localhost:3000`.
+## 🔑 Environment Variables
 
-## Running Tests
+```env
+NODE_ENV=development
+PORT=3000
+```
 
-1. Run the tests:
+## 📁 Project Structure
 
-   ```sh
-   npm test
-   # or
-   yarn test
-   ```
+```
+src/
+├── config/         # Configuration files
+├── controllers/    # Request handlers
+├── models/        # Database entities
+├── repositories/  # Data access layer
+├── routes/        # API routes
+├── services/      # Business logic
+├── helpers/       # Utility functions
+tests/             # Test files
+```
 
-## API Endpoints
+## 📚 API Documentation
 
-- `POST /orders` - Create a new order
-- `GET /orders` - Get all orders (paginated)
-- `GET /orders/:id` - Get order by ID
-- `PUT /orders/:id` - Update an order
-- `DELETE /orders/:id` - Delete an order
-- `GET /orders/count/all/orders` - Get total count of orders
-- `GET /orders/customerName/:name` - Get orders by customer name
+### Endpoints
 
-## Postman Collection
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | /orders | Create new order |
+| GET | /orders | List all orders |
+| GET | /orders/:id | Get order by ID |
+| PUT | /orders/:id | Update order |
+| DELETE | /orders/:id | Delete order |
+| GET | /orders/count/all/orders | Get total orders |
+| GET | /orders/customerName/:name | Search by customer |
 
-A Postman collection is included in the `docs` folder. The collection contains pre-configured requests for all API endpoints with example payloads.
+### Request Examples
 
-To use the collection:
+#### Create Order
 
-1. Open Postman
-2. Click "Import"
-3. Select the file `docs/XPE Challenge.postman_collection.json`
-4. All endpoints will be available under the "XPE Challenge" collection
+```json
+POST /orders
+{
+  "orderNumber": "ORD001",
+  "customerName": "John Doe",
+  "totalValue": 99.99
+}
+```
 
-## License
+#### Update Order
 
-This project is licensed under the MIT License.
+```json
+PUT /orders/1
+{
+  "totalValue": 149.99
+}
+```
+
+## 🧪 Testing
+
+```sh
+# Run all tests
+npm test
+
+# Run specific test suite
+npm test -- orders.test.ts
+
+# Run with coverage
+npm run test:coverage
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/new-feature`
+3. Commit changes: `git commit -am 'Add new feature'`
+4. Push to branch: `git push origin feature/new-feature`
+5. Submit a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
