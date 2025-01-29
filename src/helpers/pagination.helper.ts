@@ -34,7 +34,6 @@ export const paginate = <T>(
   page: number,
   limit: number,
 ): PaginatedResult<T> => {
-  // Ensure valid pagination parameters
   const validPage = Math.max(1, page);
   const validLimit = Math.max(1, limit);
 

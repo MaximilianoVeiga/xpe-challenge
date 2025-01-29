@@ -20,7 +20,6 @@ describe('Order API', () => {
   });
 
   beforeEach(async () => {
-    // Ensure clean state for each test
     const queryRunner = AppDataSource.createQueryRunner();
     await queryRunner.startTransaction();
     try {
@@ -37,7 +36,7 @@ describe('Order API', () => {
   afterAll(async () => {
     if (AppDataSource.isInitialized) {
       await AppDataSource.destroy();
-      await new Promise((resolve) => setTimeout(resolve, 500)); // Allow connections to close
+      await new Promise((resolve) => setTimeout(resolve, 500));
     }
   });
 
@@ -71,7 +70,6 @@ describe('Order API', () => {
 
   describe('GET /orders', () => {
     beforeEach(async () => {
-      // Create test orders in a transaction
       await AppDataSource.transaction(async (transactionalEntityManager) => {
         const orders = [
           createTestOrder({ orderNumber: 'TEST-001', customerName: 'John' }),
