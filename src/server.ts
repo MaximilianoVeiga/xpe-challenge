@@ -6,11 +6,11 @@ const PORT = process.env.PORT ?? 3000;
 
 const gracefulShutdown = (server: any) => {
   return async () => {
-    logger.info('Received shutdown signal. Closing server...');
+    logger.info('Server shutdown initiated');
     server.close(async () => {
-      logger.info('Server closed. Closing database connection...');
+      logger.info('HTTP server closed');
       await AppDataSource.destroy();
-      logger.info('Database connection closed. Exiting...');
+      logger.info('Cleanup completed successfully');
       process.exit(0);
     });
   };
@@ -18,9 +18,10 @@ const gracefulShutdown = (server: any) => {
 
 const startServer = async () => {
   try {
+    logger.info('Starting server initialization');
     const app = await initApp();
     const server = app.listen(PORT, () => {
-      logger.info(`Server running on port ${PORT}`);
+      logger.info('Server started successfully');
     });
 
     process.on('SIGTERM', gracefulShutdown(server));
@@ -28,7 +29,7 @@ const startServer = async () => {
 
     return server;
   } catch (error) {
-    logger.error('Error starting server:', error);
+    logger.error('Fatal error during server startup');
     process.exit(1);
   }
 };

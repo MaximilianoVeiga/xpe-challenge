@@ -27,13 +27,17 @@ export const initializeDatabase = async () => {
 
   initializationPromise = (async () => {
     try {
+      logger.info('Starting database initialization');
+
       if (AppDataSource.isInitialized) {
+        logger.info('Closing existing database connection');
         await AppDataSource.destroy();
       }
 
       await AppDataSource.initialize();
 
       if (process.env.NODE_ENV === 'test') {
+        logger.info('Synchronizing test database');
         await AppDataSource.synchronize(true);
       }
 
@@ -41,11 +45,11 @@ export const initializeDatabase = async () => {
       await verifyDatabaseStructure(queryRunner);
       await queryRunner.release();
 
-      logger.info('Database initialized and verified successfully');
+      logger.info('Database initialization completed');
       return AppDataSource;
     } catch (error) {
       initializationPromise = null;
-      logger.error('Database initialization failed:', error);
+      logger.error('Database initialization failed');
       throw error;
     }
   })();

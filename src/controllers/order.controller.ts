@@ -30,10 +30,20 @@ export class OrderController {
         totalValue,
       });
 
-      logger.info(`Order created: ${newOrder.id}`);
+      logger.info('Order created successfully', {
+        orderId: newOrder.id,
+        orderNumber,
+        customerName,
+        operation: 'create',
+      });
       res.status(201).json(newOrder);
     } catch (error) {
-      logger.error('Error creating order: ' + error);
+      logger.error('Order creation failed', {
+        error: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+        orderData: req.body,
+        operation: 'create',
+      });
       res.status(500).json({ error: 'Internal Server Error' });
     }
   }
@@ -55,9 +65,19 @@ export class OrderController {
       const limit = parseInt(req.query.limit as string) || 10;
 
       const paginated = paginate(allOrders, page, limit);
+      logger.info('Orders retrieved successfully', {
+        page,
+        limit,
+        totalItems: allOrders.length,
+        operation: 'findAll',
+      });
       res.status(200).json(paginated);
     } catch (error) {
-      logger.error('Error fetching orders: ' + error);
+      logger.error('Failed to fetch orders', {
+        error: error instanceof Error ? error.message : String(error),
+        params: { page: req.query.page, limit: req.query.limit },
+        operation: 'findAll',
+      });
       res.status(500).json({ error: 'Internal Server Error' });
     }
   }

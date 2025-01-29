@@ -18,7 +18,6 @@ export const initApp = async () => {
   try {
     const dataSource = await initializeDatabase();
     app.set('typeorm', dataSource);
-    logger.info('Application initialized successfully');
     return app;
   } catch (error) {
     logger.error('Failed to initialize application:', error);
