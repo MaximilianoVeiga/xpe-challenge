@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app, { initApp } from '../src/app';
+import app from '../src/app';
 import { Order } from '../src/models/order.entity';
 import { AppDataSource, initializeDatabase } from '../src/config/database';
 
@@ -16,16 +16,28 @@ const createTestOrder = (data = {}) => {
 
 describe('Order API', () => {
   beforeAll(async () => {
-    await initApp();
+    await initializeDatabase();
   });
 
-  afterEach(async () => {
-    await AppDataSource.synchronize(true);
+  beforeEach(async () => {
+    // Ensure clean state for each test
+    const queryRunner = AppDataSource.createQueryRunner();
+    await queryRunner.startTransaction();
+    try {
+      await queryRunner.manager.delete(Order, {});
+      await queryRunner.commitTransaction();
+    } catch (err) {
+      await queryRunner.rollbackTransaction();
+      throw err;
+    } finally {
+      await queryRunner.release();
+    }
   });
 
   afterAll(async () => {
     if (AppDataSource.isInitialized) {
       await AppDataSource.destroy();
+      await new Promise((resolve) => setTimeout(resolve, 500)); // Allow connections to close
     }
   });
 

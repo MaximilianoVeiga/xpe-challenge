@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { AppDataSource, initializeDatabase } from './config/database';
+import { initializeDatabase } from './config/database';
 import orderRoutes from './routes/order.routes';
 import { logger } from './config/logger';
 
