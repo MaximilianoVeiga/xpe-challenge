@@ -7,6 +7,26 @@ This project is a simple API for managing orders using Node.js, Express, and Typ
 - Node.js (>= 20.x)
 - npm or yarn
 
+## C4 Model
+
+### System Context Diagram (Level 1)
+
+![System Context Diagram](./docs/XPE-Challenge%20-%20C4%20-%20Context%20Diagram%20(Level1).png)
+
+*Figure 1: System Context diagram showing the high-level interactions with the Orders Management System*
+
+### Container Diagram (Level 2)
+
+![Container Diagram](./docs/XPE-Challenge%20-%20C4%20-%20Container%20Diagram%20(Level%202).png)
+
+*Figure 2: Container diagram showing the internal architecture and components*
+
+## Architecture Overview
+
+![Architecture Overview](./docs/architecture.png)
+
+*Figure 1: High-level architecture diagram showing the system components and their interactions*
+
 ## Setup
 
 1. Clone the repository:
