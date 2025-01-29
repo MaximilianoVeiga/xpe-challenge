@@ -13,7 +13,7 @@ This project is a simple API for managing orders using Node.js, Express, and Typ
 
 ![System Context Diagram](./docs/XPE-Challenge%20-%20C4%20-%20Context%20Diagram%20(Level1).png)
 
-*Figure 1: System Context diagram showing the high-level interactions with the Orders Management System*
+*Figure 1: System Context diagram showing the high-level interactions*
 
 ### Container Diagram (Level 2)
 
