@@ -35,12 +35,7 @@ export class OrderController {
         totalValue,
       });
 
-      logger.info('Order created successfully', {
-        orderId: newOrder.id,
-        orderNumber,
-        customerName,
-        operation: 'create',
-      });
+      logger.info('Order created successfully');
       res.status(201).json(newOrder);
     } catch (error) {
       logger.error('Order creation failed', {
@@ -71,12 +66,7 @@ export class OrderController {
       const limit = parseInt(req.query.limit as string) || 10;
 
       const paginated = paginate(allOrders, page, limit);
-      logger.info('Orders retrieved successfully', {
-        page,
-        limit,
-        totalItems: allOrders.length,
-        operation: 'findAll',
-      });
+      logger.info('Orders retrieved successfully');
       res.status(200).json(paginated);
     } catch (error) {
       logger.error('Failed to fetch orders', {
