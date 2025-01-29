@@ -6,23 +6,23 @@ import { logger } from './config/logger';
 const app = express();
 
 app.use(express.json());
-
+app.use('/orders', orderRoutes);
 app.set('typeorm', AppDataSource);
 
-const init = async () => {
+export const initApp = async () => {
   try {
     const dataSource = await initializeDatabase();
     app.set('typeorm', dataSource);
-    app.use('/orders', orderRoutes);
     logger.info('Application initialized successfully');
+    return app;
   } catch (error) {
     logger.error('Failed to initialize application:', error);
-    process.exit(1);
+    throw error;
   }
 };
 
 if (process.env.NODE_ENV !== 'test') {
-  init();
+  initApp();
 }
 
 export default app;

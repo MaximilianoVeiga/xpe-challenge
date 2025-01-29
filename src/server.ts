@@ -1,5 +1,4 @@
-import app from './app';
-import { AppDataSource } from './config/database';
+import { initApp } from './app';
 import { logger } from './config/logger';
 
 const PORT = process.env.PORT ?? 3000;
@@ -9,13 +8,12 @@ const PORT = process.env.PORT ?? 3000;
  */
 const startServer = async () => {
   try {
-    await AppDataSource.initialize();
-    logger.info('Database connected successfully!');
+    const app = await initApp();
     app.listen(PORT, () => {
       logger.info(`Server running on port ${PORT}`);
     });
   } catch (error) {
-    logger.error('Error connecting to database: ' + error);
+    logger.error('Error starting server: ' + error);
     process.exit(1);
   }
 };
