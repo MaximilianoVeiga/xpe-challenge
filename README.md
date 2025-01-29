@@ -18,7 +18,7 @@ A robust RESTful API service for order management built with Node.js, Express, a
 ## ✨ Features
 
 - RESTful API endpoints for order management
-- TypeORM integration with PostgreSQL
+- TypeORM integration with SQLite database
 - Request validation and error handling
 - Comprehensive logging system
 - Pagination support
