@@ -1,10 +1,20 @@
 import { initApp } from './app';
 import { logger } from './config/logger';
 import { AppDataSource } from './config/database';
+import { Server } from 'http';
 
+/**
+ * Default port for the server to listen on
+ * @constant {number}
+ */
 const PORT = process.env.PORT ?? 3000;
 
-const gracefulShutdown = (server: any) => {
+/**
+ * Handles graceful shutdown of the server and database connection
+ * @param {Server} server - The HTTP server instance to shut down
+ * @returns {Function} Shutdown handler function
+ */
+const gracefulShutdown = (server: Server) => {
   return async () => {
     logger.info('Server shutdown initiated');
     server.close(async () => {
@@ -16,6 +26,11 @@ const gracefulShutdown = (server: any) => {
   };
 };
 
+/**
+ * Initializes and starts the Express application server
+ * @returns {Promise<Server>} The HTTP server instance
+ * @throws {Error} If server initialization fails
+ */
 const startServer = async () => {
   try {
     logger.info('Starting server initialization');
