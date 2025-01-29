@@ -4,16 +4,21 @@ import { OrderService } from '../services/order.service';
 import { paginate } from '../helpers/pagination.helper';
 import { logger } from '../config/logger';
 
+/** @type {OrderService} Service instance for order operations */
 const orderService = new OrderService();
 
 /**
  * Controller handling HTTP requests for Order operations
+ * @class OrderController
+ * @classdesc Provides endpoints for CRUD operations on orders
  */
 export class OrderController {
   /**
-   * Creates a new order
-   * @param req - Express request object containing order data
-   * @param res - Express response object
+   * Creates a new order in the system
+   * @param {Request} req - Express request object containing order data in the body
+   * @param {Response} res - Express response object
+   * @returns {Promise<void>}
+   * @throws {Error} When order creation fails
    */
   static async create(req: Request, res: Response): Promise<void> {
     try {
@@ -49,9 +54,10 @@ export class OrderController {
   }
 
   /**
-   * Retrieves all orders with pagination
-   * @param req - Express request object containing pagination parameters
-   * @param res - Express response object
+   * Retrieves a paginated list of all orders
+   * @param {Request} req - Express request with optional page and limit query parameters
+   * @param {Response} res - Express response object
+   * @returns {Promise<void>}
    */
   static async findAll(req: Request, res: Response): Promise<void> {
     try {
@@ -83,9 +89,10 @@ export class OrderController {
   }
 
   /**
-   * Retrieves an order by its ID
-   * @param req - Express request object containing order ID
-   * @param res - Express response object
+   * Retrieves a specific order by its ID
+   * @param {Request} req - Express request with order ID parameter
+   * @param {Response} res - Express response object
+   * @returns {Promise<void>}
    */
   static async findById(req: Request, res: Response): Promise<void> {
     try {
@@ -108,9 +115,10 @@ export class OrderController {
   }
 
   /**
-   * Finds orders by customer name
-   * @param req - Express request object containing customer name
-   * @param res - Express response object
+   * Finds all orders for a specific customer
+   * @param {Request} req - Express request with customer name parameter
+   * @param {Response} res - Express response object
+   * @returns {Promise<void>}
    */
   static async findByCustomerName(req: Request, res: Response): Promise<void> {
     try {
@@ -132,8 +140,9 @@ export class OrderController {
 
   /**
    * Updates an existing order
-   * @param req - Express request object containing updated order data
-   * @param res - Express response object
+   * @param {Request} req - Express request with order ID and updated data
+   * @param {Response} res - Express response object
+   * @returns {Promise<void>}
    */
   static async update(req: Request, res: Response): Promise<void> {
     try {
@@ -165,9 +174,10 @@ export class OrderController {
   }
 
   /**
-   * Deletes an order
-   * @param req - Express request object containing order ID
-   * @param res - Express response object
+   * Deletes an order from the system
+   * @param {Request} req - Express request with order ID parameter
+   * @param {Response} res - Express response object
+   * @returns {Promise<void>}
    */
   static async delete(req: Request, res: Response): Promise<void> {
     try {
@@ -187,9 +197,10 @@ export class OrderController {
   }
 
   /**
-   * Counts total number of orders
-   * @param req - Express request object
-   * @param res - Express response object
+   * Retrieves the total count of orders in the system
+   * @param {Request} req - Express request object
+   * @param {Response} res - Express response object
+   * @returns {Promise<void>}
    */
   static async count(req: Request, res: Response): Promise<void> {
     try {
